@@ -2,7 +2,7 @@ services:
   - type: web
     name: voidaccount-api
     runtime: node
-    buildCommand: corepack enable pnpm && pnpm install --frozen-lockfile && pnpm --filter @workspace/api-server run build
+    buildCommand: COREPACK_ENABLE_STRICT=0 npx --yes pnpm@10 install --frozen-lockfile && npx --yes pnpm@10 --filter @workspace/api-server run build
     startCommand: node --enable-source-maps artifacts/api-server/dist/index.mjs
     plan: free
     envVars:
@@ -26,14 +26,14 @@ services:
   - type: web
     name: voidaccount-shop
     runtime: node
-    buildCommand: corepack enable pnpm && pnpm install --frozen-lockfile && pnpm --filter @workspace/tg-shop run build
+    buildCommand: COREPACK_ENABLE_STRICT=0 npx --yes pnpm@10 install --frozen-lockfile && npx --yes pnpm@10 --filter @workspace/tg-shop run build
     startCommand: npx serve -s artifacts/tg-shop/dist -l $PORT
     plan: free
 
   - type: web
     name: voidaccount-admin
     runtime: node
-    buildCommand: corepack enable pnpm && pnpm install --frozen-lockfile && pnpm --filter @workspace/admin-panel run build
+    buildCommand: COREPACK_ENABLE_STRICT=0 npx --yes pnpm@10 install --frozen-lockfile && npx --yes pnpm@10 --filter @workspace/admin-panel run build
     startCommand: npx serve -s artifacts/admin-panel/dist -l $PORT
     plan: free
 
